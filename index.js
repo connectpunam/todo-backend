@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 mongoose
-  .connect("mongodb+srv://admin:admin@airbnb.hkzaocj.mongodb.net/todo")
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
@@ -45,7 +45,8 @@ app.delete("/delete/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+const PORT = process.env.PORT || 3001;
 
-app.listen(3001, () => {
-  console.log("http://localhost:3001/");
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
